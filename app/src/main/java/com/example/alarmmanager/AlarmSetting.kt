@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.widget.Toast
 import com.example.alarmmanager.service.AlarmService
 
 class AlarmSetting(val context: Context?) {
@@ -12,7 +13,7 @@ class AlarmSetting(val context: Context?) {
 
     init {
         // set your alarms here
-        //getting the alarm manager
+        // getting the alarm manager
         am = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     }
 
@@ -29,6 +30,7 @@ class AlarmSetting(val context: Context?) {
             am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pi)
         }
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, time, AlarmManager.INTERVAL_DAY, pi)
+        Toast.makeText(context, "Alarm Set", Toast.LENGTH_SHORT).show()
     }
 
     fun cancelAlarm(){

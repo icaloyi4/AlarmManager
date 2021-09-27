@@ -23,12 +23,13 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import com.example.alarmmanager.MainActivity
 import java.lang.Exception
 
 
 class BootService : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (context!=null){
+        /*if (context!=null){
             val sharedData = SharedData(context)
             var myAlarm = sharedData.getDataLong("myAlarm")
 
@@ -37,21 +38,23 @@ class BootService : BroadcastReceiver() {
                 alarmSetting.setAlarm(myAlarm)
             }
 
-        }
+        }*/
 
-//        if (intent?.action == "android.intent.action.BOOT_COMPLETED") {
-//            Toast.makeText(context, "Masuk Boot Receivernya", Toast.LENGTH_SHORT).show()
-//            if (context!=null){
-//                val sharedData = SharedData(context)
-//                var myAlarm = sharedData.getDataLong("myAlarm")
-//
-//                if (!myAlarm.equals(0)){
-//                    val alarmSetting = AlarmSetting(context)
-//                    alarmSetting.setAlarm(myAlarm)
-//                }
-//
-//            }
-//        }
+        if (intent?.action == "android.intent.action.BOOT_COMPLETED") {
+            val sharedData = SharedData(context!!)
+            var myAlarm = sharedData.getDataLong("myAlarm")
+
+            if (!myAlarm.equals(0)) {
+                val alarmSetting = AlarmSetting(context)
+                alarmSetting.setAlarm(myAlarm)
+            }
+
+
+
+//                var i = Intent(context, MainActivity::class.java)
+//                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                context?.startActivity(i)
+        }
     }
 
     fun showNotification(context: Context, title: String?, body: String?, intent: Intent?) {
